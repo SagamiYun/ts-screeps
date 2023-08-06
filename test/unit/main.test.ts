@@ -1,10 +1,11 @@
 import {assert} from "chai";
-import {loop} from "../../src/main";
+import {loop, init} from "../../src/main";
 import {Game, Memory} from "./mock"
 
 describe("main", () => {
   before(() => {
     // runs before all test in this block
+    init();
   });
 
   beforeEach(() => {
@@ -29,6 +30,7 @@ describe("main", () => {
 
     Game.creeps.persistValue = "any value";
 
+    init();
     loop();
 
     assert.isDefined(Memory.creeps.persistValue);
