@@ -16,6 +16,7 @@ interface CreepMemory {
   sentryId?: Id<StructureRampart> | null;
   configName?: string;
   sourceIndex?: number | null;
+  path?: {x: number, y: number, count: number}[];
 }
 
 /**
@@ -40,6 +41,7 @@ interface Memory {
   log: any;
   creepConfigs: { [configName: string]: ICreepConfig };
   trafficMap: { [key: string]: number };
+  sourceCreeps: { [sourceId: Id<Source>]: number };
 }
 // Memory extension
 
