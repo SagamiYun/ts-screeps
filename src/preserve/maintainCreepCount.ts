@@ -19,8 +19,7 @@ const defaultCreepCounts: CreepCount = {
   [CreepRole.BUILDER]: 1,
   [CreepRole.UPGRADER]: 2,
   [CreepRole.REPAIRER]: 1,
-
-  [CreepRole.CARRIER]: 1,
+  [CreepRole.CARRIER]: 2,
   // [CreepRole.FIGHTER]: 3,
   // [CreepRole.BIGFREE]: 2,
   [CreepRole.SMALLFREE]: 1
@@ -65,17 +64,6 @@ export function spawnCreeps(room: Room) {
               if(spawn.spawning == null) {
                   // 孵化新的creep
                   createCreep(type as CreepRole, spawn)
-
-                  // 能量足够建造大家伙
-                  // if (spawn.room.energyAvailable >= 550) {
-                  //   spawn.spawnCreep( [WORK,WORK,WORK,WORK,CARRY,MOVE,MOVE],
-                  //       type + 'Big:' + Date.now(),
-                  //     { memory: { role: type } } );
-                  // }  else if (type === 'none') {
-                  //   // 能量不够建造小家伙
-                  //   spawn.spawnCreep([WORK, CARRY, MOVE], type + ": " + Date.now(), {memory: {role: type}});
-                  // }
-
                   console.log("执行了维持Creep函数, Creep类型为: " + type)
                   break;
               }

@@ -4,6 +4,7 @@ export enum IRoomStatus {
     COLONYEXPANSIONMODE = 'colonyExpansionMode', // 殖民地扩展模式
     RESOURCESHORTAGEMODE = 'resourceShortageMode', // 资源不足模式
     NORMALMODE = 'normalMode', // 平常模式
+    SMALEBOSEMODE = 'smaleBaseMode' //小殖民地模式
 }
 
 const defenseModeCooldown = 5; // 默认冷却tick
@@ -23,8 +24,16 @@ export function loopGlobalStatus(room: Room) {
         // 如果有敌人，激活防御模式
         room.memory.status = IRoomStatus.DEFENSEMODE;
     } else {
-
         // 如果没有敌人，但是防御模式是激活的，那么设置一个计时器来关闭防御模式
+        if (!coolwodn && (roomStatus === IRoomStatus.DEFENSEMODE)) {
+            room.memory.statusCooldown = defenseModeCooldown;
+        } else if (coolwodn > 1) {
+            room.memory.statusCooldown--;
+        } else {
+            room.memory.status = IRoomStatus.NORMALMODE;
+            room.memory.statusCooldown = 0;
+        }
+
         if (!coolwodn && (roomStatus === IRoomStatus.DEFENSEMODE)) {
             room.memory.statusCooldown = defenseModeCooldown;
         } else if (coolwodn > 1) {

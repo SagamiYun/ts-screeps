@@ -10,8 +10,7 @@ export const roleSmallFreeRole = {
         else {
             let targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN || structure.structureType == STRUCTURE_STORAGE) &&
-                    // return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
+                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_LINK) &&
                         structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                 }
             });

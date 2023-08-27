@@ -8,6 +8,7 @@ import { roleClaimer } from "role/action/claimer"
 import { roleSmallFreeRole } from "role/action/smallfree"
 import { roleTower } from "construct/tower"
 import { initialize } from "initialize";
+import { constructLink } from "./construct/link"
 import { spawnCreeps } from "preserve/maintainCreepCount"
 import { loopGlobalStatus } from "preserve/globalStatus"
 import { buildTrafficMapRoad } from "build/buildTrafficMapRoad"
@@ -35,6 +36,9 @@ export const loop = ErrorMapper.wrapLoop(() => {
 
   // 维持Creep函数
   spawnCreeps(room);
+
+  // 根据ID传输对应的Link能量
+  constructLink();
 
   for(const name in Game.creeps) {
     const creep = Game.creeps[name];
@@ -68,7 +72,7 @@ export const loop = ErrorMapper.wrapLoop(() => {
     }
 
     if (creep.memory.role == 'carrier') {
-      roleCarrier.run(creep);
+      roleCarrier.run(creep, room);
     }
 
     if (creep.memory.role == 'claimer') {

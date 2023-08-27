@@ -11,6 +11,7 @@ interface CreepMemory {
   room?: string;
   targetRoom?: string;
   working?: boolean;
+  excetendBool?: boolean;
   roomMoving?: boolean;
   sourceId?: Id<Source> | null;
   containerId?: Id<StructureContainer> | null;
