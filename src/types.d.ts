@@ -9,7 +9,9 @@ type RolesBodiesConfig = { [name in Roles]: { bodies: BodyPartConstant[]; cost: 
 interface CreepMemory {
   role: string;
   room?: string;
+  targetRoom?: string;
   working?: boolean;
+  roomMoving?: boolean;
   sourceId?: Id<Source> | null;
   containerId?: Id<StructureContainer> | null;
   destId?: Id<Structure> | null;
@@ -26,6 +28,8 @@ interface RoomMemory {
   sources: ISourcesInfo;
   spawns: StructureSpawn[];
   flags: Flag[];
+  status: string;
+  statusCooldown: number;
   towers: Id<StructureTower>[];
   sentries: { [id: string]: boolean };
   rclContainerId: Id<StructureContainer> | null;

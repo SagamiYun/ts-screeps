@@ -1,5 +1,6 @@
 // initFun
 export const initialize = (): void => {
+    console.log("push main OJ8K!");
     console.log("start init!");
 
     // start Buid extension

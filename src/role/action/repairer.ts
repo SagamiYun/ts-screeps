@@ -15,7 +15,8 @@ export const roleRepairer = {
             let towers = Game.spawns['Spawn1'].room.find(FIND_MY_STRUCTURES).filter((structure) => {
                 if(structure instanceof StructureTower) {
                     let tower = structure as StructureTower;
-                    return tower.energy < tower.energyCapacity;
+                    // return tower.energy < tower.energyCapacity;
+                    return false;
                 }
                 return false;
             });

@@ -10,6 +10,7 @@ export function buildTrafficMapRoad(creep: Creep) {
     // 在每个tick结束时，统计所有creep走过的位置
     let positions: {[key: string]: {x: number, y: number, count: number}} = {};
 
+    console.log(positions);
     if(creep.memory.path) {
         for(var i in creep.memory.path) {
             var pos = creep.memory.path[i];
@@ -24,9 +25,10 @@ export function buildTrafficMapRoad(creep: Creep) {
     }
 
     // 检查哪些位置被多次经过，并在那里建立道路
-    var threshold = 50; // 设置阈值，你可以根据需要调整
-    for(var key in positions) {
-        var pos = positions[key];
+    const threshold = 50; // 设置阈值，你可以根据需要调整
+    for(let key in positions) {
+        const pos = positions[key];
+        console.log(pos.x, pos.y, pos.count)
         if(pos.count >= threshold) {
             // 在该位置创建道路
             var room = Game.rooms[creep.room.name];
