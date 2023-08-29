@@ -1,18 +1,18 @@
 import { IRoomStatus } from '../../preserve/globalStatus'
 
-const targetLink: StructureLink | null = Game.getObjectById('64eb082d587a557eba071138');
-
 export const roleCarrier = {
     run: function(creep: Creep, room: Room) {
 
+        let targetLink: StructureLink | null = Game.getObjectById('64eb082d587a557eba071138');
         !creep.memory.excetendBool && (creep.memory.excetendBool = false)
+        targetLink && targetLink.store[RESOURCE_ENERGY] > 400 ? (creep.memory.excetendBool = true) : (creep.memory.excetendBool = false)
 
         // 如果creep正在搬运能量但是能量已经用完，就去获取能量
         if(creep.memory.working && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.working = false;
-            creep.memory.excetendBool = false;
             creep.say('🔄 fetch');
         }
+
         // 如果creep不在搬运能量并且能量满载，就去搬运能量
         if(!creep.memory.working && creep.store.getFreeCapacity() == 0) {
             creep.memory.working = true;
@@ -57,9 +57,10 @@ export const roleCarrier = {
                 case IRoomStatus.RESOURCESHORTAGEMODE:
                     // TODO:
                     break;
+                case IRoomStatus.BUILDINGMODE:
                 case IRoomStatus.NORMALMODE:
                     const targetTow = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
-                        filter: (s) => s.structureType === STRUCTURE_TOWER && (s.energy / s.energyCapacity) < 0.3
+                        filter: (s) => s.structureType === STRUCTURE_TOWER && (s.energy / s.energyCapacity) < 0.7
                     });
 
                     if (creep.memory.excetendBool && source) {
@@ -112,10 +113,10 @@ export const roleCarrier = {
                 case IRoomStatus.RESOURCESHORTAGEMODE:
                     // TODO:
                     break;
+                case IRoomStatus.BUILDINGMODE:
                 case IRoomStatus.NORMALMODE:
-                    if(targetLink) {
+                    if(targetLink && creep.memory.excetendBool) {
                         if(creep.withdraw(targetLink, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.memory.excetendBool = true;
                             creep.moveTo(targetLink, {visualizePathStyle: {stroke: '#ffaa00'}});
                         }
                     } else if(source) {
@@ -124,7 +125,7 @@ export const roleCarrier = {
                             creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
                         }
                     }
-                    break;
+                break;
             }
         }
     }

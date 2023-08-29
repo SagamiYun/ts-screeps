@@ -3,6 +3,8 @@ export const initialize = (): void => {
     console.log("push main OJ8K!");
     console.log("start init!");
 
+    // 清空路径Count存储
+    Game.rooms['E57N57'].memory.roadPositions = {}
     // start Buid extension
     // buildExtensionsAroundSpawn("Spawn1", 5);
 }

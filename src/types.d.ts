@@ -12,6 +12,7 @@ interface CreepMemory {
   targetRoom?: string;
   working?: boolean;
   excetendBool?: boolean;
+  excetendNumberControl?: number;
   roomMoving?: boolean;
   sourceId?: Id<Source> | null;
   containerId?: Id<StructureContainer> | null;
@@ -19,7 +20,7 @@ interface CreepMemory {
   sentryId?: Id<StructureRampart> | null;
   configName?: string;
   sourceIndex?: number | null;
-  path?: {x: number, y: number, count: number}[];
+  path?: {roomPos: RoomPosition, count: number}[];
 }
 
 /**
@@ -30,6 +31,7 @@ interface RoomMemory {
   spawns: StructureSpawn[];
   flags: Flag[];
   status: string;
+  roadPositions: {[key: string]: {x: number, y: number, count: number}};
   statusCooldown: number;
   towers: Id<StructureTower>[];
   sentries: { [id: string]: boolean };

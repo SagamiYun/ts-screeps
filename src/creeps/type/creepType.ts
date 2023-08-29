@@ -12,7 +12,8 @@ export enum CreepRole {
     FIGHTER = 'fighter',   // 战斗
     CLAIMER = 'claimer',   // 标注及扩展领地
     BIGFREE = 'bigfree',
-    SMALLFREE = 'smallfree'
+    SMALLFREE = 'smallfree',
+    EXTERIORHARVESTER = 'exteriorHayverter', // 外部采集
 }
 
 export const CREEP_CONFIGS: Record<CreepRole, CreepConfig> = {
@@ -30,7 +31,7 @@ export const CREEP_CONFIGS: Record<CreepRole, CreepConfig> = {
     },
     [CreepRole.UPGRADER]: {
         role: CreepRole.UPGRADER,
-        body: [WORK, WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE]
+        body: [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]
     },
     [CreepRole.REPAIRER]: {
         role: CreepRole.REPAIRER,
@@ -50,7 +51,11 @@ export const CREEP_CONFIGS: Record<CreepRole, CreepConfig> = {
     },
     [CreepRole.SMALLFREE]: {
         role: CreepRole.SMALLFREE,
-        body: [WORK, WORK, CARRY, MOVE]
+        body: [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE]
+    },
+    [CreepRole.EXTERIORHARVESTER]: {
+        role: CreepRole.EXTERIORHARVESTER,
+        body: [WORK, CARRY, CARRY, MOVE]
     },
 };
 

@@ -11,18 +11,20 @@ interface CreepCount {
   [CreepRole.FIGHTER]?: number;
   [CreepRole.BIGFREE]?: number;
   [CreepRole.SMALLFREE]?: number;
+  [CreepRole.EXTERIORHARVESTER]?: number;
 }
 
 // Creep默认类型和数量
 const defaultCreepCounts: CreepCount = {
   [CreepRole.HARVESTER]: 2,
   [CreepRole.BUILDER]: 1,
-  [CreepRole.UPGRADER]: 2,
+  [CreepRole.UPGRADER]: 1,
   [CreepRole.REPAIRER]: 1,
   [CreepRole.CARRIER]: 2,
   // [CreepRole.FIGHTER]: 3,
   // [CreepRole.BIGFREE]: 2,
-  [CreepRole.SMALLFREE]: 1
+  [CreepRole.SMALLFREE]: 1,
+  [CreepRole.EXTERIORHARVESTER]: 2
 };
 
 function getCreepCounts(room: Room): CreepCount {
@@ -41,6 +43,9 @@ function getCreepCounts(room: Room): CreepCount {
           creepCounts[CreepRole.SMALLFREE] = 3;
           creepCounts[CreepRole.UPGRADER] = 1;
           creepCounts[CreepRole.BUILDER] = 0;
+          break;
+      case IRoomStatus.BUILDINGMODE:
+          creepCounts[CreepRole.BUILDER] = 2;
           break;
       case IRoomStatus.NORMALMODE:
           break;
